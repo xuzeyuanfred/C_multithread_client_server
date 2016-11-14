@@ -1,0 +1,28 @@
+CS 111 Project 1b
+Name:Zeyuan XU
+ID: 004255573
+
+This project is built on project 1a, mainly the parts:
+1. setting up pipelines between parent and child process, in this case the server program and "/bin/bash"
+2. setting up the input mode as noncanonical mode, as well as the input methods from the prvious project, which is from stdin (keyboard) to parent, then to shell.
+
+the added features from this project include:
+3. a socket connecting the server and the client program, and different form the pipes, socket is more convinient and it can go in both directions. the --port option and the whole socket API is learned from "GNU C library" chapter 16, and "the LInux Programming Interface", chapter 62,63. 
+
+4. the --log option and --encrypt option. The log option is used to record the I/Os as captured from server to client and client to server. In normal mode, the message to server will be recorded as "SENT %d bytes: %s" format and the message received from server will be recorded as "RECEIVED %d bytes: %s". The --encrypt option makes use of a software package called mcrypt-dev on Linux, and the whole API and tutorial can be found online at "mcrypt.hellbug.gr". It implements the encryption on an end-to-end connection, and encrypt and decrypt messages on both client and server end, much like the mechanism of a TCP connection.
+
+======
+FIles
+======
+This submission includes two c source files, one README, one Makefile, and one key.me file.
+The server.c is used to build the server program
+The client.c is used to build the client program.
+The server program is invoked as "./server --port=<portno>" as without encryption flag, and "./server --port=<portno> --encrypt" as with encryption flag.
+The client program runs after the server waits. it is used with
+"./client --port=<portno> --log=<logfile> --encrypt" when used with full functionality.
+key.me is used for encryption in both the server and the client program. The cryptography algorithm used in this program is the "blowfish".
+
+==========
+additional
+==========
+the spec looks better than the first one, since we now have a picture to describe what to do.
